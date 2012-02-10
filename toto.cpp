@@ -1,4 +1,1 @@
-int main(argc **argv)
-{
-   return 5;
-}
+ccglfdmglg,lhlkhnù
