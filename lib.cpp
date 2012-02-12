@@ -1,8 +1,10 @@
+#include <iostream>
 #include "lib.h"
-namespace Lib
-{
-	char * add(char * left, int sizeOfLeft, char * right, int izeOfRight)
+
+
+	char* add(char * left, int sizeOfLeft, char * right, int sizeOfRight)
 	{
+		return left;
 
 	}
-}
+
