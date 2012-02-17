@@ -96,6 +96,9 @@ char * coreAdd(char * left, int sizeOfLeft, char * right, int sizeOfRight) {
         result[max] = result[max] % ('9'+1);
         if (carry)
             result[max] = result[max] + '0';
+        else
+            while (max--)
+                result[max] = big[max];
     }
 
 
@@ -122,16 +125,28 @@ char * coreAdd(char * left, int sizeOfLeft, char * right, int sizeOfRight) {
     return result;
 }
 
+void myCopy(const char * source, char * target) {
+    int i = 0;
+    while (source[i])
+        target[i++] = source[i];
+    target[i] = 0;
+}
+
 int main(void)
 {
 
     char left[100];
     cout << "Input first number : " ; cin.getline(left, 100);
     int leftSize = cin.gcount(); 
-
+   /*myCopy("99999999999199",left);
+     int leftSize = 15;
+    */
     char right[100];
     cout << "Input second number : " ; cin.getline(right,100);
     int rightSize = cin.gcount();
+   /*myCopy("1",right);
+     int rightSize = 2;    
+    */
 
     char * res = coreAdd(left,leftSize,right,rightSize);
     cout << res << endl;
