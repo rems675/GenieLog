@@ -16,7 +16,6 @@ class LongInt {
 
         void add(LongInt &);
         void sub(LongInt &);
-        void expand(int);
 
     private:
 
@@ -24,6 +23,7 @@ class LongInt {
         int size, stock;
         bool sign;
 
+        void expand(int);
 
         void coreAdd(LongInt &);
    //   void coreAdd(int *, int *, char *, int *, char *);
