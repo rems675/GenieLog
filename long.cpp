@@ -252,9 +252,9 @@ void LongInt::coreAdd(LongInt & N) {
  */
 void LongInt::coreSub(LongInt & N) {
 
-    /* Step 1 : Determines which number is longer. */
+    /* Step 1 : Determines which number is bigger. */
     // So that we can deal with both cases at once, we'll attach some alias to
-    //  the two array of digits, depending on which one's the longest one.
+    //  the two array of digits, depending on which one's the biggest one.
     int max =   size;    char * big   =   number;
     int min = N.size;    char * small = N.number;
     if (__strcmp(number, size, N.number, N.size) == -1) {
