@@ -39,22 +39,18 @@ LongInt::LongInt() {
         buffer[0] = '0';
     }
 
+    stock   = 32;
     number += 32;
     int i;
     for (i = size ; i >= 0 ; --i)
         number[i] = buffer[i];
-    number -= 32;
 
-    stock = 31;
-    while (true) {
+    --size;
+    while (number[0] == '0') {
         ++stock;
+        ++number;
         --size;
-        if (number[stock] != '0')
-            break;
     }
-
-    number = &number[stock];
-
 }
 
 
