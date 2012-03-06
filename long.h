@@ -3,6 +3,8 @@
 
 # include <iostream>
 
+# include "misc.h"
+
 using namespace std;
 
 class LongInt {

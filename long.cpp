@@ -5,7 +5,7 @@
  * \brief   Implementation of LongInt class methods.
  * \author  Gigator & ouroumov
  * \version 0.1
- * \date    February 29 - 2012
+ * \date    March 6 - 2012
  *
  */
 
@@ -163,12 +163,16 @@ void LongInt::sub(LongInt & N) {
  */
 void LongInt::coreAdd(LongInt & N) {
     /* Initialization : Find out which number has max or min length. */
-    int min = N.size - 2;
-    int max = size - 2;
+    int min = N.size;
+    int max = size;
     if (max < min) {
-        max = N.size - 2;
-        min = size - 2;
+        max = N.size;
+        min = size;
     }
+
+    max -= 2;   // Ditch EOS & Account for zero-based indices.
+    min -= 2;
+
     char carry = 0;
     char * distant = N.number;
     char * local = number;
@@ -253,7 +257,7 @@ void LongInt::coreSub(LongInt & N) {
     //  the two array of digits, depending on which one's the longest one.
     int max =   size;    char * big   =   number;
     int min = N.size;    char * small = N.number;
-    if ((max < min) || ((max == min) && (number[0] < N.number[0]))) {
+    if (__strcmp(number, size, N.number, N.size) == -1) {
         sign = !sign;
         min =   size;   small =   number;
         max = N.size;   big   = N.number;
