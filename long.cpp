@@ -45,7 +45,6 @@ LongInt::LongInt() {
     for (i = size ; i >= 0 ; --i)
         number[i] = buffer[i];
 
-    --size;
     while (number[0] == '0') {
         ++stock;
         ++number;
@@ -259,15 +258,15 @@ void LongInt::coreSub(LongInt & N) {
         min =   size;   small =   number;
         max = N.size;   big   = N.number;
     }
-    min--;   // Ditch EOS.
-    max--;
+    min -= 2;   // Ditch EOS.
+    max -= 2;
 
     big    += max;  // Align last char before EOS.
     small  += min;
-    number += (size - 1);
+    number += (size - 2);
 
     stock += size;
-    stock -= max + 1;
+    stock -= max + 2;
 
     max = max - min; // max now the number of extra digits in the longest array.
 
