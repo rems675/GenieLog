@@ -26,7 +26,13 @@ LongInt::LongInt() {
     size = cin.gcount();
 
     /* Initialize array of digits using the input buffer. */
-    number = new char[size+32]; // Wrap.
+    try {
+        number = new char[size+32];
+    } catch (...) { 
+        cerr << "Memory allocation exception raised" << endl ;
+        return;
+    }
+
     sign = false;
     if (buffer[0] == '-') { 
         sign = true;
