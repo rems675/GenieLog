@@ -253,7 +253,7 @@ void LongInt::coreSub(LongInt & N) {
     //  the two array of digits, depending on which one's the longest one.
     int max =   size;    char * big   =   number;
     int min = N.size;    char * small = N.number;
-    if (max < min) {
+    if ((max < min) || ((max == min) && (number[0] < N.number[0]))) {
         sign = !sign;
         min =   size;   small =   number;
         max = N.size;   big   = N.number;
