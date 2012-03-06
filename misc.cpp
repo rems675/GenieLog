@@ -9,7 +9,7 @@
  *
  */
 
-int __strcmp(char * left, int sizeOfLeft, char * right, int sizeOfRight)
+int __strcmp(char * & left, int & sizeOfLeft, char * & right, int & sizeOfRight)
 {
 
     if (sizeOfLeft > sizeOfRight)  // We check if the left number is longer.
