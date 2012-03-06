@@ -331,7 +331,7 @@ void LongInt::coreSub(LongInt & N) {
         --number;
     }
     
-    /* Step 55 : Completion. Update stock and size values. */ 
+    /* Step 5 : Completion. Update stock and size values. */ 
 
     ++number;   // Because of last hop in the previous loop.
     while (number[0] == '0') {  // Skip leading zeros.
