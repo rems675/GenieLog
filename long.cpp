@@ -132,8 +132,8 @@ void LongInt::add(LongInt & N) {
  * \fn      void LongInt::sub(LongInt & N)
  * \brief   coreSub() routine wrapper.
  *
- * Handle memory re-allocation if needed and decide if the operation to perform
- * is really a subtraction or an addition.
+ * Handle request for memory re-allocation if needed and decide if the operation
+ * to perform is really a subtraction or an addition.
  *
  */
 void LongInt::sub(LongInt & N) {
