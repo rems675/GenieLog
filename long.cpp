@@ -28,7 +28,7 @@ LongInt::LongInt() {
     /* Initialize array of digits using the input buffer. */
     try {
         number = new char[size+32];
-    } catch (...) { 
+    } catch (...) {
         cerr << "Memory allocation exception raised" << endl ;
         return;
     }
@@ -251,8 +251,7 @@ void LongInt::coreAdd(LongInt & N) {
  *
  */
 void LongInt::coreSub(LongInt & N) {
-
-    /* Step 1 : Determines which number is bigger. */
+    /* Step 1 : Determines which number is bigger & Initialize. */
     // So that we can deal with both cases at once, we'll attach some alias to
     //  the two array of digits, depending on which one's the biggest one.
     int max =   size;    char * big   =   number;
@@ -262,6 +261,8 @@ void LongInt::coreSub(LongInt & N) {
         min =   size;   small =   number;
         max = N.size;   big   = N.number;
     }
+
+    //*
     min -= 2;   // Ditch EOS.
     max -= 2;
 
@@ -269,8 +270,10 @@ void LongInt::coreSub(LongInt & N) {
     small  += min;
     number += (size - 2);
 
-    stock += size;
+    stock += size;      //
     stock -= max + 2;
+    size = max + 2;
+    //*/
 
     max = max - min; // max now the number of extra digits in the longest array.
 
@@ -345,9 +348,16 @@ void LongInt::coreSub(LongInt & N) {
 
 
 
-/*
-bool & LongInt::operator > (LongInt & N) { }
-bool & LongInt::operator < (LongInt & N) { }
+//*
+bool LongInt::operator > (LongInt & N) {
+    if (sign != N.sign)
+        return N.sign;
+    else
+        if (__strcmp(number, size, N.number, N.size) == 1)
+            return !sign;
+        return sign;
+}
+bool LongInt::operator < (LongInt & N) { }
 //*/
 
 
