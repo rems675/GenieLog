@@ -145,7 +145,6 @@ void LongInt::add(LongInt & N) {
  *
  */
 void LongInt::sub(LongInt & N) {
-
     if (size+stock <= N.size)
         expand(N.size);
 
@@ -260,6 +259,7 @@ void LongInt::coreAdd(LongInt & N) {
  *
  */
 void LongInt::coreSub(LongInt & N) {
+    /* Step 0 : Handles operations with "zero" parameters. */
     if (N.size < 2)
         return;
     if (size < 2) {
