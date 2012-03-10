@@ -34,7 +34,7 @@ LongInt::LongInt() {
     }
 
     sign = false;
-    if (buffer[0] == '-') { 
+    if (buffer[0] == '-') {
         sign = true;
         buffer[0] = '0';
     }
@@ -72,7 +72,15 @@ LongInt::~LongInt() { number -= stock; delete [] number; }
  * Displays the number on standard output, with eventual sign prefix.
  *
  */
-void LongInt::display() { if (sign) cout << "-" ;  cout << number << endl ; }
+void LongInt::display() { 
+    if (size < 2) {
+        cout << "0" << endl ;
+        return;
+    }
+    if (sign) 
+        cout << "-" ;
+    cout << number << endl ;
+}
 
 
 
@@ -137,6 +145,7 @@ void LongInt::add(LongInt & N) {
  *
  */
 void LongInt::sub(LongInt & N) {
+
     if (size+stock <= N.size)
         expand(N.size);
 
@@ -251,6 +260,18 @@ void LongInt::coreAdd(LongInt & N) {
  *
  */
 void LongInt::coreSub(LongInt & N) {
+    if (N.size < 2)
+        return;
+    if (size < 2) {
+        sign = !N.sign;
+        size = N.size;
+        number -= size;
+        stock -= size;
+        for (size  ; size >= 0 ; --size)
+            number[size] = N.number[size];
+        size = N.size;
+        return;
+    }
     /* Step 1 : Determines which number is bigger & Initialize. */
     // So that we can deal with both cases at once, we'll attach some alias to
     //  the two array of digits, depending on which one's the biggest one.
