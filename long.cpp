@@ -93,9 +93,7 @@ void LongInt::display() {
  *
  */
 void LongInt::expand(int newSize) {
-    ++newSize;
-    while (newSize % 32)
-        ++newSize;
+    newSize += 32;
     try {
         char * tmp = new char[newSize];
         int oldStock = stock;
@@ -283,23 +281,21 @@ void LongInt::coreSub(LongInt & N) {
         max = N.size;   big   = N.number;
     }
 
-    //*
-    min -= 2;   // Ditch EOS.
+    min -= 2;           // Ditch EOS.
     max -= 2;
 
-    big    += max;  // Align last char before EOS.
+    big    += max;      // Align last char before EOS.
     small  += min;
     number += (size - 2);
 
-    stock += size;      //
+    stock += size;      // Updates values for stock and size.
     stock -= max + 2;
     size = max + 2;
-    //*/
 
-    max = max - min; // max now the number of extra digits in the longest array.
+    max = max - min;    // max == number of extra digits in the longest array.
 
 
-    char tmp;   // Will be used for temp storage of digits.
+    char tmp;           // Will be used for temporary storage of digits.
     char carry;
 
     /* Step 2 : Find the first non-zero digit in the smallest array. */
@@ -309,7 +305,7 @@ void LongInt::coreSub(LongInt & N) {
         --big;
         --number;
     }
-    tmp = 58 - small[0];        // tmp is now small's digit Ten-complement.
+    tmp = 58 - small[0];// tmp is now small's digit Ten-complement.
     tmp += big[0];
     if (tmp > 57) {
         tmp -= 10;
@@ -318,12 +314,12 @@ void LongInt::coreSub(LongInt & N) {
     else
         carry = 0;
 
-    number[0] = tmp; // The target array is always the local one.
+    number[0] = tmp;    // The target array is always the local one.
 
-    --min;      // Go to next digit.
-    --small;    //
-    --big;      //
-    --number;   //
+    --min;              // Go to next digit.
+    --small;            //
+    --big;              //
+    --number;           //
 
     /* Step 3 : Compute & add niner-complements. */
     for (min ; min >= 0 ; --min) {
@@ -374,11 +370,22 @@ bool LongInt::operator > (LongInt & N) {
     if (sign != N.sign)
         return N.sign;
     else
-        if (__strcmp(number, size, N.number, N.size) == 1)
-            return !sign;
-        return sign;
+        if (sign && __strcmp(number, size, N.number, N.size) == -1)
+            return true;
+        if (!sign && __strcmp(number, size, N.number, N.size) == 1)
+            return true;
+        return false;
 }
-bool LongInt::operator < (LongInt & N) { }
+bool LongInt::operator < (LongInt & N) {
+    if (sign != N.sign)
+        return sign;
+    else
+        if (sign && __strcmp(number, size, N.number, N.size) == 1)
+            return true;
+        if (!sign && __strcmp(number, size, N.number, N.size) == -1)
+            return true;
+        return false;
+}
 //*/
 
 
