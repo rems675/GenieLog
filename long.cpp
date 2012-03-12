@@ -55,6 +55,23 @@ LongInt::LongInt() {
 
 
 /**
+ * \fn      LongInt::LongInt(int n)
+ * \brief   Alternate constructor.
+ *
+ * Construct an empty object with the capacity to store "n" digits.
+ *
+ */
+LongInt::LongInt(int n) {
+    number = new char[n+1];
+    stock = n;
+    size = 1;
+    number += stock;
+    sign = false;
+}
+
+
+
+/**
  * \fn      LongInt::~LongInt()
  * \brief   Object Destructor.
  *
@@ -88,8 +105,7 @@ void LongInt::display() {
  * \fn      void expand(int newSize)
  * \brief   Memory re-allocation routine.
  * 
- * Expands available storage space to the closest multiple of 32 past the
- * value specified in parameter.
+ * Expands available storage space to 32 over the value specified in parameter.
  *
  */
 void LongInt::expand(int newSize) {
@@ -106,6 +122,43 @@ void LongInt::expand(int newSize) {
         delete [] number;
         number = tmp;
     } catch (...) { cerr << "Memory allocation exception raised." << endl; }
+}
+
+
+
+/**
+ * \fn      void LongInt::inc()
+ * \brief   Incrementation routine.
+ *
+ * Increment local number by one.
+ *
+ */
+void LongInt::inc() {
+    if (!stock)
+        expand(size);
+    char carry = 1;
+    for (int i = size - 2 ; i >= 0 ; --i) {
+        if (carry) {
+            carry += number[i];
+            if (carry > 57) {
+                carry -= 10;
+                number[i] = carry;
+                carry = 1;
+            }
+            else {
+                number[i] = carry;
+                carry = 0;   
+            }
+        }
+        else
+            break;
+    }
+    if (carry) {
+        --number;
+        --stock;
+        ++size;
+        number[0] = '1';
+    }
 }
 
 
@@ -159,7 +212,7 @@ void LongInt::sub(LongInt & N) {
 
 
 /**
- * \fn      coreAdd(LongInt & N)
+ * \fn      void LongInt::coreAdd(LongInt & N)
  * \brief   Core addition routine.
  *
  * Adds two numbers represented as arrays of characters by performing the
@@ -193,6 +246,8 @@ void LongInt::coreAdd(LongInt & N) {
             local[0] -= 10;
             carry = 1;
         }
+        else
+            carry = 0;
         --local;
         --distant;
     }
@@ -249,7 +304,7 @@ void LongInt::coreAdd(LongInt & N) {
 
 
 /**
- * \fn      coreSub(LongInt & N)
+ * \fn      void LongInt::coreSub(LongInt & N)
  * \brief   Core subtraction routine.
  *
  * Subtract the number contained in the "N" object to the local object. This is
@@ -350,9 +405,8 @@ void LongInt::coreSub(LongInt & N) {
         --big;
         --number;
     }
-    
-    /* Step 5 : Completion. Update stock and size values. */ 
 
+    /* Step 5 : Completion. Update stock and size values. */
     ++number;   // Because of last hop in the previous loop.
     while (number[0] == '0') {  // Skip leading zeros.
         ++stock;
@@ -362,31 +416,151 @@ void LongInt::coreSub(LongInt & N) {
 }
 
 
+/**
+ * \fn      void LongInt::mul(LongInt & N);
+ * \brief   Multiplication routine.
+ *
+ * Mutiply local by the value of "N".
+ *
+ */
+void LongInt::mul(LongInt & N) {
+    if (N.size < 2) {
+        number += size;
+        stock += size;
+        size = 1;
+        return;
+    }
+
+    if (sign != N.sign)
+        sign = true;
+    else if (sign && N.sign)
+        sign = false;
+
+    if (stock <= N.size)
+        expand(size + N.size);
+
+    LongInt temporary(size + N.size);
+    LongInt result(size + N.size);
+
+    int i, j;
+    char digit;
+    for (i = N.size - 2, j = 0 ; i >= 0 ; --i, ++j) {
+        digit = N.number[i];
+        if (digit != '0') {
+            coreMul(temporary, digit, j);
+            result.add(temporary);
+        }
+    }
+
+    (*this) = result;
+
+}
 
 
 
-//*
+/**
+ * \fn      void LongInt::coreMul(LongInt & target, char digit, int offset)
+ * \brief   Core multiplication routine.
+ *
+ * Load the "target" object with the correctly offseted result of the
+ * multiplication of local by "digit".
+ *
+ */
+void LongInt::coreMul(LongInt & target, char digit, int offset) {
+    digit -= '0';
+    target.number += target.size; // Clear. 
+    target.stock  += target.size;
+    target.stock  -= (size + offset);
+    target.size    = (size + offset);
+    int i;      // Loop counter.
+    char tmp;   // For temporary storage of digits.
+    char carry = 0;
+    /* Add "offset" zeros to the end of the target array. */
+    target.number -= 2;
+    for (i = offset ; i > 0 ; --i) {
+        target.number[0] = '0';
+        --target.number;
+    }
+    /* Do the multiplication while proparating the carry. */
+    for (i = size - 2 ; i >= 0 ; --i) {
+        tmp = number[i];
+        tmp -= '0';
+        tmp *= digit;
+        tmp += carry;
+        if (tmp > 9) {
+            carry = tmp / 10;
+            tmp   = tmp % 10;
+        }
+        else
+            carry = 0;
+        tmp += '0';
+        target.number[0] = tmp;
+        --target.number;
+    }
+    /* Check if the last operation raised a carry and handle it if it did. */
+    ++target.number;
+    if (carry) {
+        --target.number;
+        --target.stock;
+        ++target.size;
+        target.number[0] = carry + '0';   
+    }
+}
+
+
+
+/**
+ * \fn      void LongInt::div(LongInt & N)
+ * \brief   Division routine.
+ *
+ *
+ *
+ *
+ *
+ */
+void LongInt::div(LongInt & N) {
+    LongInt quotient(31);
+    LongInt remainder(31);
+}
+
+
+
+
+
 bool LongInt::operator > (LongInt & N) {
     if (sign != N.sign)
         return N.sign;
-    else
+    else {
         if (sign && __strcmp(number, size, N.number, N.size) == -1)
             return true;
         if (!sign && __strcmp(number, size, N.number, N.size) == 1)
             return true;
-        return false;
+    }
+    return false;
 }
+
 bool LongInt::operator < (LongInt & N) {
     if (sign != N.sign)
         return sign;
-    else
+    else {
         if (sign && __strcmp(number, size, N.number, N.size) == 1)
             return true;
         if (!sign && __strcmp(number, size, N.number, N.size) == -1)
             return true;
-        return false;
+    }
+    return false;
 }
-//*/
+
+void LongInt::operator = (LongInt & N) {
+    number += size;
+    stock += size;
+    number -= N.size;
+    stock -= N.size;
+    size = N.size;
+    int i = size;
+    while (i--)
+        number[i] = N.number[i];
+}
 
 
 
@@ -406,9 +580,10 @@ bool LongInt::operator < (LongInt & N) {
 
 
 
-
-
-
+void LongInt::echo() { 
+    cout << "stock : " << stock << 
+            "\nsize : " << size << endl;
+}
 
 
 
