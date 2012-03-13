@@ -141,6 +141,7 @@ void LongInt::inc() {
 
     if (!stock)
         expand(size);
+
     char carry = 1;
     for (int i = size - 2 ; i >= 0 ; --i) {
         if (carry) {
@@ -475,9 +476,6 @@ void LongInt::mul(LongInt & N) {
     else if (sign && N.sign)
         sign = false;
 
-    if (stock <= N.size)
-        expand(size + N.size);
-
     LongInt temporary(size + N.size);
     LongInt result(size + N.size);
 
@@ -553,13 +551,19 @@ void LongInt::coreMul(LongInt & target, char digit, int offset) {
  * \brief   Division routine.
  *
  *
- *
- *
+ * Naïve and inefficient division routine.
+ * Set local with the quotient of local divided by N.
  *
  */
 void LongInt::div(LongInt & N) {
     LongInt quotient(31);
-    LongInt remainder(31);
+    bool oldSign = sign;
+    while (sign == oldSign) {
+        sub(N);
+        quotient.inc();
+    }
+    quotient.dec();
+    (*this) = quotient;
 }
 
 
@@ -591,11 +595,16 @@ bool LongInt::operator < (LongInt & N) {
 }
 
 void LongInt::operator = (LongInt & N) {
-    number += size;
-    stock += size;
+    number += size;     // This...
+    stock += size;      //  and this clears local from any content.
+
+    if (stock <= N.size)
+        expand(N.size);
+
     number -= N.size;
     stock -= N.size;
     size = N.size;
+    sign = N.sign;
     int i = size;
     while (i--)
         number[i] = N.number[i];
