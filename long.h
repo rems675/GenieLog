@@ -13,22 +13,20 @@ class LongInt {
 
         LongInt();
         LongInt(int);
-       ~LongInt();
 
         void display();
-        void echo();
-
-        void inc();
-        void dec();
 
         void add(LongInt &);
         void sub(LongInt &);
+
         void mul(LongInt &);
         void div(LongInt &);
 
         bool operator > (LongInt &);
         bool operator < (LongInt &);
         void operator = (LongInt &);
+
+       ~LongInt();
 
     private:
 
@@ -38,12 +36,11 @@ class LongInt {
 
         void expand(int);
 
+        void inc();
+        void dec();
+
         void coreAdd(LongInt &);
-   //   void coreAdd(int *, int *, char *, int *, char *);
-
         void coreSub(LongInt &);
-   //   void coreSub(int *, int *, char *, int *, char *);
-
         void coreMul(LongInt &, char, int);
 
 };

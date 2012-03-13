@@ -130,10 +130,15 @@ void LongInt::expand(int newSize) {
  * \fn      void LongInt::inc()
  * \brief   Incrementation routine.
  *
- * Increment local number by one.
+ * Increment the local number by one.
  *
  */
 void LongInt::inc() {
+
+    if (size < 2) { sign = false; }
+
+    if (sign) { sign = false; dec(); sign = true; return; }
+
     if (!stock)
         expand(size);
     char carry = 1;
@@ -160,6 +165,40 @@ void LongInt::inc() {
         number[0] = '1';
     }
 }
+
+/**
+ * \fn      void LongInt::dec()
+ * \brief   Decrementation routine.
+ *
+ * Decrement the local number by one.
+ *
+ */
+void LongInt::dec() {
+
+    if (size < 2) { inc(); sign = true; return; }
+
+    if (sign) { sign = false; inc(); sign = true; return; }
+
+    char carry = 1;
+    for (int i = size - 2 ; i >= 0 ; --i) {
+        if (carry) {
+            if (number[i] == '0')
+                number[i] = '9';
+            else {
+                --number[i];
+                carry = 0;
+            }
+        }
+        else
+            break;
+    }
+    if (number[0] == '0') {
+        ++number;
+        ++stock;
+        --size;
+    }
+}
+
 
 
 
