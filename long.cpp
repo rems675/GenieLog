@@ -623,7 +623,7 @@ void LongInt::operator = (LongInt & N) {
     stock -= N.size;
     size = N.size;
     sign = N.sign;
-    int i = size;
+    int i = size - 1;
     while (i--)
         number[i] = N.number[i];
 }
