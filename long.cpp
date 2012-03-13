@@ -595,11 +595,13 @@ bool LongInt::operator < (LongInt & N) {
 }
 
 void LongInt::operator = (LongInt & N) {
-    number += size;     // This...
-    stock += size;      //  and this clears local from any content.
 
     if (stock <= N.size)
         expand(N.size);
+
+    number += size;     // This...
+    stock += size;      //  and this clears local from any content.
+
 
     number -= N.size;
     stock -= N.size;
