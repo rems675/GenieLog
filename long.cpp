@@ -567,6 +567,22 @@ void LongInt::div(LongInt & N) {
 }
 
 
+/**
+ * \fn      void LongInt::fact()
+ * \brief   Factorial routine.
+ *
+ * Raises local to it's factorial.
+ *
+ */
+void LongInt::fact() {
+    LongInt N(0);
+    N = (*this);
+    N.dec();
+    while (N.size > 1) {
+        mul(N);
+        N.dec();
+    }
+}
 
 
 

@@ -15,6 +15,7 @@ class LongInt {
         LongInt(int);
 
         void display();
+        void echo();
 
         void add(LongInt &);
         void sub(LongInt &);
@@ -25,6 +26,8 @@ class LongInt {
         bool operator > (LongInt &);
         bool operator < (LongInt &);
         void operator = (LongInt &);
+
+        void fact();
 
        ~LongInt();
 
