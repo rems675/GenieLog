@@ -1,11 +1,9 @@
-main : main.cpp long.o long.h misc.o misc.h
-	g++ -g -o main main.cpp long.o misc.o
+main : longint/lib/liblongint.a main.cpp
+	g++ main.cpp -I longint/include -Llongint/lib -llongint -o main
 
-long.o : long.cpp long.h
-	g++ -g -c long.cpp -o long.o
+longint/lib/liblongint.a :
+	cd longint/ ; make
 
-misc.o : misc.cpp misc.h
-	g++ -g -c misc.cpp -o misc.o
+clean :
+	rm -f main *~ ; cd longint/ ; make clean
 
-clean : 
-	rm *.o

@@ -1,56 +1,53 @@
-# include "long.h"
+# include <long.h>
 
 
 int main(void)
 {
+    
+    cout << "a : " ;  LongInt a; a.read();
 
     //*
-    cout << "a : " ;  LongInt a; 
-    cout << "b : " ;  LongInt b;
+    cout << "b : " ;  LongInt b; b.read();
 
+    LongInt i, j, k, l, m;
 
-    a.inc();
+    i = a;
+    j = a;
+    k = a;
+    l = a;
+    m = a;
 
-    cout << "a -> " ; a.display();
-
-    //*
-
-    a.mul(b);
-    a.display();
-
-    cout << "(a > b) ? -- ";
-    if (a > b)
-        cout << "yes" << endl;
-    else
-        cout << "no" << endl;
-
-    cout << "(a < b) ? -- ";
-    if (a < b)
-        cout << "yes" << endl;
-    else
-        cout << "no" << endl;
-
-    a.sub(b); cout << "a -> " ; a.display();
-    a.sub(b); cout << "a -> " ; a.display();
-    a.add(b); cout << "a -> " ; a.display();
-    a.add(b); cout << "a -> " ; a.display();
-    b.add(a); cout << "b -> " ; b.display();
-
-    for (int i = 0 ; i < 1000000 ; ++i)
-        a.add(b);
-
-
-    cout << "a -> " ; a.display();
-    cout << "b -> " ; b.display();
-
-    a.mul(b);
-    a.display();
-
-
+    cout << "add : "; i += b; i.display();
+    cout << "sub : "; j -= b; j.display();
+    cout << "mul : "; k *= b; k.display();
+    cout << "div : "; l /= b; l.display();
+    cout << "mod : "; m %= b; m.display();
     //*/
-
     return 0;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
