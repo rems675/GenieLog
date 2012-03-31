@@ -1,0 +1,335 @@
+%%%%%%%%%%%%
+%%        
+%%   Préambule  
+%%              
+
+\documentclass[11pt]{report}
+\usepackage[latin1]{inputenc}
+\usepackage[british]{babel}
+\usepackage[pdftex,pdfborder={0 0 0}]{hyperref}
+\usepackage{graphicx}
+
+
+\makeatletter
+\renewcommand{\@chapapp}{}
+\makeatother
+
+\renewcommand{\thesection}{\arabic{section}}
+
+%%%%%%%%%%%%
+%%                      
+%%   Document  
+%%             
+%%%%%%%%%%%%
+
+ \begin{document}
+% Informations du fichier pdf
+\hypersetup{ % Modifiez la valeur des champs suivants
+    pdfauthor   = {R\'{e}my SAKSIK},
+    pdftitle    = {Technical specifications},
+    pdfsubject  = {Technical specifications},
+    pdfkeywords = {},
+    pdfcreator  = {PDFLaTeX},
+    pdfproducer = {PDFLaTeX}
+    }
+  %%%%%%%%%%%%
+%  Page de titre 
+%%%%%%%%%%%%
+    \title{Technical specifications}
+    \author { 
+    Etienne PAPEGNIES\\
+    Remy SAKSIK\\
+    Hamed SARGAZI\\
+    Naima EL MISSOURI\\
+    Avignon University\\
+    France\\
+}
+   \maketitle
+ % \cleardoublepage
+
+ \setcounter{tocdepth}{1}
+% \setcounter{secnumdepth}{1}
+
+
+
+%%%%%%%%%%%%%%
+% Table des matières 	
+%%%%%%%%%%%%%%
+    \tableofcontents
+%%%%%%%%%%%%%%%%%%
+    
+   \chapter*{Class specification}  
+   \addcontentsline{toc}{chapter}{Class specification} % pour ajouter l'introduction à la table des matières
+
+	\begin{bf}\underline{Here is the description of class method LongInt.}\end{bf}
+    \section{LongInt()}
+	\subsection{Summary}
+~~~~~~~~~~~The role of the default constructor is to retrieve data users.
+	\subsection{Function Parameters}
+~~~~~~~~~~~No parameters.
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+	    
+    \section{LongInt(int)}
+   
+	\subsection{Summary}
+~~~~~~~~~~~The role of this constructor is to simply create an empty object. (Useful for multiplication)
+	\subsection{Function Parameters}
+~~~~~~~~~~~No parameters.
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+    
+    \section{void display()}
+  
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function and allow a display of the result on stdout\\
+~~~~~~~~~~~or into a file.
+	\subsection{Function Parameters}
+~~~~~~~~~~~No parameters.
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+	  
+    \section{void expand(int)}
+  
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to reserve memory space aditional.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}int\end{bf}: 
+   Represents the space needs.
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+	  
+    \section{inc()}
+    
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function and allow incrementing a LongInt.
+	\subsection{Function Parameters}
+~~~~~~~~~~~No parameters.
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+	
+     \section{dec()}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function and allow decrementing a LongInt.
+	\subsection{Function Parameters}
+~~~~~~~~~~~No parameters. 
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+      \section{void add(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to manage the number of sign to call the function that performs the addition "coreAdd" (specified farther down).
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Is the object pass by reference which contains the number by whichare to be added to the figure that was invoked on the object.
+
+One reference, unwanted because the parameter must not be modified and we must be able to access directly.
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{void sub(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to book a table in memory that contain the result of the subtraction
+and also to manage the sign.
+To call the function that performs the subtraction "coreSub" (specified farther down)
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Is the object pass by reference which contains the digit number which
+we want to additioner figure that was invoked on the local object.
+
+One reference, unwanted because the parameter must not be modified and
+we must be able to access directly.
+
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+
+\section{void mul(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to manage two numbers and
+the sign and the size of the array that will contain the result.
+calling CoreMul to perform multiplication, then sum the result for coreAdd.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Is the object pass by reference which contains the digit number by which
+we want to multiply that figure was invoked on the object.
+
+One reference, unwanted because the parameter must not be modified and
+we must be able to access directly.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{void div(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to manage two numbers and
+the sign and the size of the array that will contain the result.
+calling CoreMul to perform multiplication, then sum the result for coreAdd.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Is the object pass by reference which contains the digit number by which
+we want to multiply that figure was invoked on the object.
+
+One reference, unwanted because the parameter must not be modified and
+we must be able to access directly.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{bool operator \textgreater (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This function checks if the local object (The left operand) is bigger than the distant object (The right operand).
+a < b a is local objet and b the distant objet
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Represents the distant object.
+
+\subsection{Return Value}
+~~~~~~~~~~~return true if the local objet is greater than distant object else false.
+
+
+\section{ bool operator \textless (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator checks if the local object and smaller than the distant object.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Represents the distant object.
+
+\subsection{Return Value}
+~~~~~~~~~~~Return true if the local object is lesser than the distant object.
+
+\section{ void operator = (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator is used to assign to the local object the distant object
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Represents the distant object.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{ void operator += (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator is used to call the addition function coreAdd (...). 
+a += b  a is local objet and b the distant objet.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}:  Represents the distant object.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{ void operator -= (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator is used to call the function of subtraction coreSub (...).
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Represents the distant object.
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+
+\section{ void operator *= (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator is used to call the function of multiplication coreMul (...).
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Represents the distant object.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{ void operator /= (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator is used to call the function of division coreDiv (...).
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Represents the distant object.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+
+\section{ void operator \%= (LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~This operator is used to call the function of modulo,  mod (...).
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}:  Represents the distant object.
+\subsection{Return Value}
+
+~~~~~~~~~~~No return value.
+
+    \chapter*{Arithmetic operations}  
+    \addcontentsline{toc}{chapter}{Arithmetic operations} % pour ajouter l'introduction à la table des matières
+
+      \begin{bf}
+~~~We introduice with a little vocabulary
+a.add(b) correspond to: \begin{center}  local = a~~~and~~~distant = b. \end{center}
+\begin{center}Modify is local but not remote.\end{center}
+    \end{bf}
+
+
+\section{void coreAdd(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~Perform the addition of two big positive integers.
+divide the number that was invoked on the object.
+One reference, unwanted because the parameter must not be modified and
+we must be able to access directly.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Perform the addition the number passed in parameter to the local number.
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{void coreSub(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to perform the subtraction of two digit.
+~~~~~~~~~~~Subtract that was invoked on the object.
+One reference, unwanted because the parameter must not be modified and
+we must be able to access directly.
+	\subsection{Function Parameters}
+~~~~~~~~~~~\begin{bf}LongInt\&\end{bf}: Perform the substraction the number passed in parameter to the local number.
+
+	\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{void coreMul(LongInt \&, char, int)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function and multiply the figure in question by a number of multiplier
+and store the result in a temporary array.
+	\subsection{Function Parameters}
+	\begin{tabbing} 
+\begin{bf}LongInt\&\end{bf}: Is the target object of a temporary operation.\\
+\begin{bf}char\end{bf}: Corresponds to a digit of the multiplier.\\
+\begin{bf}int\end{bf}: Represents the number of zero are added to the right\\
+correspond to the correct power of 10.
+	\end{tabbing} 
+
+\section{void coreDiv(LongInt \& N, LongInt \& Quotient)}
+	\subsection{Summary}
+~~~~~~~~~~~ Divide local by distant object N, N being at most ten times local. Local is set with the remainder,
+ the actual result is set in Quotient
+	\subsection{Function Parameters}
+	\begin{tabbing} 
+\begin{bf}LongInt\& N \end{bf}: Is the object that represent the remote object with the remainder\\
+\begin{bf}LongInt\&  Quotient \end{bf}: Is the target object of the result.\\
+	\end{tabbing} 
+
+\subsection{Return Value}
+~~~~~~~~~~~No return value.
+
+\section{void mod(LongInt \&)}
+	\subsection{Summary}
+~~~~~~~~~~~The role of this function is to performed the modulo.
+	\subsection{Function Parameters}
+	\begin{tabbing} 
+\begin{bf}LongInt\&\end{bf}: Is the objet local.\\
+	\end{tabbing} 
+
+ \chapter*{Diagram}  
+   \addcontentsline{toc}{chapter}{UML Diagram} % pour ajouter l'introduction à la table des matières
+	
+	\begin{figure}[!h] %on ouvre l'environnement figure
+	\includegraphics[width=15cm]{fig128013.png} %ou image.png, .jpeg etc.
+	\caption{Use case diagram} %la légende
+	\label{Use case diagram} %l'étiquette pour faire référence à cette image
+	\end{figure} %on ferme l'environnement figure 
+
+   
+
+
+
+\end{document}
+
+
+
+

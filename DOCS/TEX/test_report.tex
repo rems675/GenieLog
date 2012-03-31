@@ -1,0 +1,239 @@
+%%%%%%%%%%%%
+%%        
+%%   Préambule  
+%%              
+
+\documentclass[11pt]{report}
+\usepackage[latin1]{inputenc}
+\usepackage[british]{babel}
+\usepackage[pdftex,pdfborder={0 0 0}]{hyperref}
+
+
+\makeatletter
+\renewcommand{\@chapapp}{}
+\makeatother
+
+\renewcommand{\thesection}{\arabic{section}}
+
+%%%%%%%%%%%%
+%%                      
+%%   Document  
+%%             
+%%%%%%%%%%%%
+
+ \begin{document}
+% Informations du fichier pdf
+\hypersetup{ % Modifiez la valeur des champs suivants
+    pdfauthor   = {R\'{e}my SAKSIK},
+    pdftitle    = {Test report},
+    pdfsubject  = {Test report},
+    pdfkeywords = {},
+    pdfcreator  = {PDFLaTeX},
+    pdfproducer = {PDFLaTeX}
+    }
+  %%%%%%%%%%%%
+%  Page de titre 
+%%%%%%%%%%%%
+    \title{REPORT}
+    \author { 
+    Etienne PAPEGNIES\\
+    Remy SAKSIK\\
+    Hamed SARGAZI\\
+    Naima EL MISSOURI\\
+    Avignon University\\
+    France\\
+}
+   \maketitle
+ % \cleardoublepage
+
+ %\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{1}
+
+
+
+%%%%%%%%%%%%%%
+% Table des matières 	
+%%%%%%%%%%%%%%
+    \tableofcontents
+%%%%%%%%%%%%%%%%%%
+    
+   \chapter*{Introduction}  
+   \addcontentsline{toc}{chapter}{Introduction} % pour ajouter l'introduction à la table des matières
+   
+~~~~~~~~~In this paper we describe the test procedures.
+ We use Valgring for memory test and gprof for profiling.
+
+To achieve these we proceed to test two test two and test memories profiling.
+In a first test we realized that a loop is usually a 10 to * any operations on numbers randomly \\
+(created thanks to the function 'rand ()'), which are each 4096 bytes.
+In a second test we realized that a loop is usually a 50 to * any operations on random numbers.
+
+\begin{bf}nota:Every time you spend in a loop we create objects of class LongInt.\end{bf}\\
+EX: main.cpp
+\\
+ for(int i=0; i< 10; i++) {\\
+      LongInt a; LongInt b;\\
+
+      LongInt i(32), j(32), k(32), l(32), m(32);\\
+
+      i = a; j = a; k = a; l = a; m = a; \\
+
+      i += b;  j -= b; k *= b; l /= b; m \%= b; \\
+ 
+    }
+ for(int i=0; i< 50; i++) {\\
+      LongInt a; LongInt b;\\
+
+      LongInt i(32), j(32), k(32), l(32), m(32);\\
+
+      i = a; j = a; k = a; l = a; m = a; \\
+
+      i += b;  j -= b; k *= b; l /= b; m \%= b; \\
+ 
+    }
+When an object is created it is assigned a random number with the function 'rand ()' cf : default constructor
+
+  char buffer[4096];\\
+  srand ( time(NULL) );\\
+ \begin{bf}generate secret number:\end{bf} \\
+  for(k=0; k<4095; k++)\\
+	buffer[k] = rand()\%10 + 48;\\
+buffer[4095]='\textbackslash0';\\
+  
+ \chapter*{Plan de test}
+ \addcontentsline{toc}{chapter}{Plan de test} % pour ajouter l'introduction à la table des matières
+    \section{coreAdd(LongInt)}
+\begin{tabular}{|l|c|c|}
+  \hline
+   & YES & NO \\
+  \hline
+ The sum is she corectement performed? & X &  \\
+  \hline
+\end{tabular}
+
+    \section{coreSub(LongInt)}
+
+\begin{tabular}{|l|c|c|}
+  \hline
+   & YES & NO \\
+  \hline
+ The substraction is she corectement performed? & X &  \\
+  \hline
+\end{tabular}
+
+    \section{coreMul(LongInt)}
+  
+\begin{tabular}{|l|c|c|}
+ \hline
+   & YES & NO \\
+  \hline
+ The multiplication is she corectement performed? & X &  \\
+  \hline
+\end{tabular}
+
+    \section{coreDiv(LongInt)}
+
+\begin{tabular}{|l|c|c|}
+ \hline
+   & YES & NO \\
+  \hline
+ The divison is she corectement performed? & X &  \\
+  \hline
+\end{tabular}
+
+ \section{mod(LongInt)}
+
+\begin{tabular}{|l|c|c|}
+ \hline
+   & YES & NO \\
+  \hline
+ The modulo is it corectement performed? & X &  \\
+  \hline
+\end{tabular}
+
+\chapter*{Valgring}
+\addcontentsline{toc}{chapter}{Valgring} % pour ajouter l'introduction à la table des matières
+\section{First memory test}
+
+==2129== HEAP SUMMARY:\\
+==2129==     in use at exit: 12,520 bytes in 1 blocks\\
+==2129==   total heap usage: 211 allocs, 210 frees, 633,038 bytes allocated\\
+==2129==\\
+==2129== LEAK SUMMARY:\\
+==2129==    definitely lost: 0 bytes in 0 blocks\\
+==2129==    indirectly lost: 0 bytes in 0 blocks\\
+==2129==      possibly lost: 0 bytes in 0 blocks\\
+==2129==    still reachable: 12,520 bytes in 1 blocks\\
+==2129==         suppressed: 0 bytes in 0 blocks\\
+==2129==\\
+==2129== ERROR SUMMARY: 450 errors from 46 contexts (suppressed: 19 from 8)\\
+
+\section{Second memory test}
+
+==2809== HEAP SUMMARY:\\
+==2809==     in use at exit: 12,520 bytes in 1 blocks\\
+==2809==   total heap usage: 1,051 allocs, 1,050 frees, 3,115,023 bytes allocated\\
+==2809== \\
+==2809== LEAK SUMMARY:\\
+==2809==    definitely lost: 0 bytes in 0 blocks\\
+==2809==    indirectly lost: 0 bytes in 0 blocks\\
+==2809==      possibly lost: 0 bytes in 0 blocks\\
+==2809==    still reachable: 12,520 bytes in 1 blocks\\
+==2809==         suppressed: 0 bytes in 0 blocks\\
+==2809== Rerun with --leak-check=full to see details of leaked memory\\
+==2809== \\
+==2809== ERROR SUMMARY: 2400 errors from 38 contexts (suppressed: 19 from 8)\\
+
+
+
+
+
+
+\chapter*{Profiling}
+\addcontentsline{toc}{chapter}{Profiling} % pour ajouter l'introduction à la table des matières
+\section{First profiling test}
+  Flat profile:
+
+$\begin{array}{llllllll}
+time & culmutative~~seconds & self seconds & calls & self (ms/call) & total (ms/call) & name\\
+64.11 & 6.09 & 6.09 & 36847 & 0.17 & 0.17 & coreMul(...)\\
+35.89 & 9.50 & 3.41 & 36867 & 0.00 & 0.09 & coreAdd(...)\\
+0.00 & 9.50 & 0.00 & 80 & 0.00 & 0.00 & coreSub(...)\\
+0.00 & 9.50 & 0.00 & 20 & 0.00 & 0.09 & coreDiv(...)\\
+0.00 & 9.50 & 0.00 & 10 & 0.00 & 0.09 & mod(...)
+\end{array}$
+
+\section{Second profiling test}
+
+  Flat profile:
+
+$\begin{array}{lllllll}
+time & culmutative~~seconds & self seconds & calls & self (ms/call) & total (ms/call) & name\\
+64.62 & 31.14 & 31.14 & 184480 & 0.17 & 0.17 & coreMul(...)\\
+35.29 & 48.15 & 17.00 & 184580 & 0.09 & 0.09 & coreAdd(...)\\
+0.05 & 48.17 & 0.03 & 400 & 0.06 & 0.06 & coreSub(...)\\
+0.00 & 48.19 & 0.00 & 100 & 0.00 & 0.22 & coreDiv(...)\\
+0.00 & 48.19 & 0.00 & 50  & 0.00 & 0.22 & mod(...)
+\end{array}$
+
+
+
+\begin{tabbing} 
+\begin{bf}time\&\end{bf}:  program used by this function.\\
+\begin{bf}culmutative second\end{bf}:a running sum of the number of seconds accounted for by this\\ function and those listed above it.\\
+\begin{bf}selfsecond\end{bf}:the number of seconds accounted for by this function alone. This is \\the major sort for this listing. \\
+\begin{bf}call\end{bf}: the number of times this function was invoked, if this function is profiled,\\ else blank.\\
+
+\begin{bf}self ms/call\end{bf}: the average number of milliseconds spent in this function per call, if\\ this function is profiled, else blank.\\
+
+\begin{bf}total\end{bf}: the average number of milliseconds spent in this function and its descendents \\per call, if this function is profiled, else blank.\\
+
+\begin{bf}name\end{bf}: the name of the function.  This is the minor sort for this listing. The index shows\\ the location of the function in the gprof listing.\\ If the index is in parenthesis it shows\\ where it would appear in the gprof listing if it were to be printed.\\
+\end{tabbing}
+
+
+\end{document}
+
+
+
+
