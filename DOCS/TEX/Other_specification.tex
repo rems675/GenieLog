@@ -1,0 +1,109 @@
+%%%%%%%%%%%%
+%%        
+%%   Préambule  
+%%              
+
+\documentclass[11pt]{report}
+\usepackage[latin1]{inputenc}
+\usepackage[british]{babel}
+\usepackage[pdftex,pdfborder={0 0 0}]{hyperref}
+
+
+\makeatletter
+\renewcommand{\@chapapp}{}
+\makeatother
+
+\renewcommand{\thesection}{\arabic{section}}
+
+%%%%%%%%%%%%
+%%                      
+%%   Document  
+%%             
+%%%%%%%%%%%%
+
+ \begin{document}
+% Informations du fichier pdf
+\hypersetup{ % Modifiez la valeur des champs suivants
+    pdfauthor   = {R\'{e}my SAKSIK},
+    pdftitle    = {Other specifications},
+    pdfsubject  = {Other specifications},
+    pdfkeywords = {},
+    pdfcreator  = {PDFLaTeX},
+    pdfproducer = {PDFLaTeX}
+    }
+  %%%%%%%%%%%%
+%  Page de titre 
+%%%%%%%%%%%%
+    \title{Other specifications}
+    \author { 
+    Etienne PAPEGNIES\\
+    Remy SAKSIK\\
+    Hamed SARGAZI\\
+    Naima EL MISSOURI\\
+    Avignon University\\
+    France\\
+}
+   \maketitle
+ % \cleardoublepage
+
+ \setcounter{tocdepth}{1}
+% \setcounter{secnumdepth}{1}
+
+
+
+%%%%%%%%%%%%%%
+% Table des matières 	
+%%%%%%%%%%%%%%
+    \tableofcontents
+%%%%%%%%%%%%%%%%%%
+    
+   \chapter*{Input specifications}  
+   \addcontentsline{toc}{chapter}{Input specifications} % pour ajouter l'introduction à la table des matières
+
+  The user will have to specify the relatif path of the file.
+  Or just the file's name if it's in the same repertory.
+    \section{From command lines}
+~~~~~~~The users will be respected in command lines for execute the program the next 
+protype :
+
+\begin{center}
+ \begin{bf}"name of the program"\end{bf}
+\end{center}
+
+ \section{From extern file}
+
+The content of file must be with this syntax :
+
+\begin{center}
+\begin{bf}"first number":"sign":"second number"\end{bf}
+\end{center}
+	
+\begin{tiny}
+    {\normalsize Voici Delimiters are} {\large EXTREMELY} {\normalsize important, it allows the program to identify.}
+\end{tiny}
+
+The content of file must have not more than one operation.
+
+  \chapter*{Output specifications}  
+   \addcontentsline{toc}{chapter}{Output specifications} % pour ajouter l'introduction à la table des matières
+
+  \section{To a file}
+
+    The user will have to specify the relatif path of the file.
+Or just the file's name if it's in the same repertory.
+
+Generate file with the resultat of the operation. 
+
+\begin{bf}The content file will contain directly the result.\end{bf}
+
+ \section{To a standard output}
+
+The resultat will be showed on the screen.
+
+
+
+\end{document}
+
+
+
+
